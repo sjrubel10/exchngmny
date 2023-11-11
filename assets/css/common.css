@@ -1,0 +1,168 @@
+.newCardHolder{
+    display: block;
+    position: relative;
+    float: left;
+    width: 100%;
+    top: 20px;
+}
+
+.leftnavbarHolder{
+    display: block;
+    float: left;
+    position: relative;
+    width: 200px;
+}
+.maincontentHolder{
+    display: block;
+    float: left;
+    position: relative;
+    width: calc(100% - 500px);
+}
+.rightsideHolder{
+    display: block;
+    float: left;
+    position: relative;
+    width: 300px;
+}
+
+/* Add your CSS styles here */
+.left-nav {
+    width: calc(200px - 20px);
+    color: #444;
+    padding: 35px 10px 10px 40px;
+}
+
+.left-nav-item {
+    width: calc( 100% - 20px);
+    padding: 10px;
+    cursor: pointer;
+}
+
+.left-nav-item:hover {
+    color: #f74040;
+    background-color: #ffffff;
+    border-radius: 3px;
+}
+
+/* Add your CSS styles here */
+.right-panel {
+    width: 300px;
+    float: right;
+    padding: 20px;
+    background-color: #f1f1f1;
+}
+
+.right-panel-card {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.right-panel-card-image {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 8px 0 0 8px;
+}
+
+.right-panel-card-details {
+    padding: 15px;
+}
+
+.right-panel-card-title {
+    margin: 0;
+    font-size: 14px;
+}
+
+.right-panel-card-author, .right-panel-card-date {
+    margin: 5px 0;
+    font-size: 14px;
+    color: #666;
+}
+.logotextlink{
+    text-decoration: none;
+    color: #FFFFFF;
+    margin-left: 10px;
+}
+.leftnavlinktext{
+    text-decoration: none;
+    color: #333333;
+}
+
+.showHiddenLeftNavBar{
+    display: block;
+    float: left;
+    width: 200px;
+    background-color: #484545;
+    border-radius: 10px;
+    color: #FFF;
+    position: absolute;
+    z-index: 9;
+    top: -20px;
+    left: -4px;
+}
+
+@media screen and (max-width: 950px) {
+    .leftnavbarHolder {
+        display: none;
+        float: left;
+        width: 200px;
+        background-color: #fff;
+        color: #FFF;
+        position: absolute;
+        z-index: 9;
+        top: -20px;
+        left: -4px;
+        border: 1px solid #bcb2b2;
+    }
+
+    .maincontentHolder{
+        width: calc( 100% - 300px );
+    }
+    .newCardHolder{
+        width: calc( 100% - 20px );
+        padding: 10px;
+    }
+}
+@media screen and (max-width: 650px) {
+
+    .maincontentHolder{
+        width: 100% ;
+    }
+    .newCardHolder{
+        width: calc( 100% - 30px );
+        padding: 15px;
+    }
+    .rightsideHolder{
+        margin: auto;
+        float: none;
+    }
+}
+
+.loadMoreButtonHolder{
+    display: block;
+    float: left;
+    position: relative;
+    width: calc(100% - 20px);
+    padding: 15px 10px;
+}
+.loadMoreButtonText{
+    text-align: center;
+    padding: 7px 10px;
+    width: 125px;
+    background-color: #196181;
+    color: #FFFFFF;
+    margin-left: calc( 50% - 65px);
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+@media screen and (max-width: 420px) {
+    .newCardHolder {
+        width: 100%;
+    }
+}
