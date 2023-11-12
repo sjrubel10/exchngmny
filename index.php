@@ -31,12 +31,25 @@ $today_buySell_Rate = array(
     <link rel="stylesheet" href="assets/css/header.css">
     <link rel="stylesheet" href="assets/css/buysellstyles.css">
     <link rel="stylesheet" href="assets/css/common.css">
+    <link rel="stylesheet" href="assets/css/popupmessage.css">
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     
 </head>
 <body>
     <?php include_once "views/header.php"?>
+
+    <!--<div id="popupContainer" class="popup-container">
+        <div class="popup-card">
+            <span class="close-btn" id="closePopupBtn">&times;</span>
+            <h2>Popup Card Title</h2>
+            <p>This is the content of the popup card.</p>
+            <div class="button-container">
+                <button id="btnYes">Yes</button>
+                <button id="btnNo">No</button>
+            </div>
+        </div>
+    </div>-->
 
     <div class="indexContentHolder">
         <div class="banner-text">
@@ -100,6 +113,7 @@ $today_buySell_Rate = array(
 
 <script src="assets/js/common.js"></script>
 <script src="assets/js/index.js"></script>
+<script src="assets/js/popupmessage.js"></script>
 <script>
     $(document).ready(function(){
 
@@ -125,20 +139,38 @@ $today_buySell_Rate = array(
             }
             
         });
-        $("body").on("click", ".submitBuySell", function () {
+
+
+        $("body").on("click", ".submitBuySell", function ( event ) {
             event.preventDefault();
             var formData = $("#transaction-form").serialize();
-            $.ajax({
-                type: "POST",
-                // url: 'main/jsvalidation/buysellvalidate.php',
-                data: formData,
-                success: function(response) {
-                    console.log( response );
-                    alert(response['success']);
-                    $("#buySellCardHolder").fadeOut();
-                    // $("#response").html(response);
+            var queryParams = formData.split("&");
+            var isOk = true;
+            $.each(queryParams, function(index, param) {
+                var keyValue = param.split("=");
+                var value = $.trim(keyValue[1]);
+                if (value === "") {
+                    isOk = false;
                 }
             });
+
+            if( isOk ){
+                $.ajax({
+                    type: "POST",
+                    url: 'main/jsvalidation/buysellvalidate.php',
+                    data: formData,
+                    success: function(response) {
+                        var returnedData = JSON.parse(response);
+                        $("#buySellCardHolder").fadeOut();
+                        showPopUpMessage( returnedData['message'], needTitle=false , neededConfirmButton= false, confirmButtonId=false, confirmButtonClass=false );
+                        setTimeout( hidePopUpMessage, 1000);
+                    }
+                });
+            }else{
+                alert( "Please Fill up all required Fields ");
+            }
+
+
         });
 
         $("body").on("click", ".cancelBuySell", function () {
@@ -162,6 +194,8 @@ $today_buySell_Rate = array(
             let sendValue = currentValue*todaysExchangeRate;
             $("#receive_amount").val( sendValue );
         });
+
+//        setTimeout(hidePopUpMessage, 1000);
 
 });
 </script>

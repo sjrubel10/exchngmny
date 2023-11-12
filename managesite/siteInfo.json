@@ -14,10 +14,10 @@
         "Neteller": 109,
         "PerfectMoney": 107
     },
-    "todayDollerBuyRateskrill": 119,
-    "todayDollerBuyRateneteller": 112,
-    "todayDollerBuyRateperfectMoney": 109,
-    "todayDollerSellRateskrill": 111,
-    "todayDollerSellRateneteller": 110,
-    "todayDollerSellRateperfectMoney": 112
+    "todayDollerBuyRateskrill": "119",
+    "todayDollerBuyRateneteller": "112",
+    "todayDollerBuyRateperfectMoney": "109",
+    "todayDollerSellRateskrill": "111",
+    "todayDollerSellRateneteller": "110",
+    "todayDollerSellRateperfectMoney": "1120"
 }

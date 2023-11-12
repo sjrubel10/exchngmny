@@ -55,6 +55,26 @@ function getUserIdByusername( $username ) {
         $userId = false;
     }
 
+    return $userId;
+}
+
+function getUserIdByuseremail( $useremail ) {
+    $conn = Db_connect();
+
+    // Use prepared statements to prevent SQL injection
+    $sql = "SELECT id FROM users WHERE `mail` = ?";
+    $stmt = $conn->prepare( $sql );
+    if( $stmt ){
+        $stmt->bind_param("s", $useremail);
+        $stmt->execute();
+        $stmt->bind_result($userId);
+        $stmt->fetch();
+        $stmt->close();
+
+        $conn->close();
+    }else{
+        $userId = false;
+    }
 
     return $userId;
 }
@@ -64,6 +84,23 @@ function getUserDataById( $userId ) {
     $sql = "SELECT * FROM users WHERE id = $userId";
     $stmt = $conn->prepare($sql);
 //    $stmt->bind_param("i", $userId);
+    if( $stmt ){
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $userData = $result->fetch_assoc();
+        $stmt->close();
+        $conn->close();
+    }else{
+        $userData = [];
+    }
+
+    return $userData;
+}
+function getUserDataByprofileKey( $userkey ) {
+    $conn = Db_connect();
+    $sql = "SELECT * FROM users WHERE `userkey` = ?";
+    $stmt = $conn->prepare( $sql );
+    $stmt->bind_param("s", $userkey);
     if( $stmt ){
         $stmt->execute();
         $result = $stmt->get_result();
@@ -100,14 +137,26 @@ function user_registration( $user_input_data, $profileimage ){
         if( $stmt ){
             $stmt->bind_param("sssssss", $email, $username, $userkey, $profileimage, $password, $firstName, $gender );
             if ( $stmt->execute() ) {
-                $result = 'User Account Successfully Created';
+                $result = array(
+                    'success' => true,
+                    'message'=>'User Account Successfully Created',
+                    'status_code'=>200
+                );
             } else {
-                $result = 'User Account Created Fail';
+                $result = array(
+                    'success' => false,
+                    'message'=>'User Account Created Fail',
+                    'status_code'=>303
+                );
             }
             $stmt->close();
             $conn->close();
         }else{
-            $result = 'Database Error';
+            $result = array(
+                'success' => false,
+                'message'=>'Database Error',
+                'status_code'=>303
+            );
         }
 
     }
@@ -142,6 +191,26 @@ function getUsersData( $conn, $already_loaded_ids = [], $limit = 20 ) {
 
     // Return the array containing users' data
     return $usersData;
+}
+
+function updateUserExtraData( $userId, $mobile, $about, $usernidfrontside, $usernidbackside ) {
+    $conn = Db_connect();
+    // Prepare and execute the SQL statement
+    $stmt = $conn->prepare("UPDATE users SET mobile = ?, about = ?, usernidfrontside = ?, usernidbackside = ?, is_profile_info_provided = 1 WHERE id = ?");
+    if( $stmt ) {
+        $stmt->bind_param("isssi", $mobile, $about, $usernidfrontside, $usernidbackside, $userId);
+        $stmt->execute();
+        if ( $stmt->execute() ) {
+            $result = 1;
+        }else{
+            $result = 0;
+        }
+    }else{
+        $result = 0;
+    }
+    // Close the statement
+    $stmt->close();
+    return $result;
 }
 
 function user_admin_status( $status_number ){

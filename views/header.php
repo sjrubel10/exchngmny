@@ -11,18 +11,18 @@
     <div class="headerContainer" id="headerContainer">
 
         <div class="menuIconHolder">
-            <a class="logotextlink" href="/dlrtotk/index.php"><span class="logotext"><h3><?php echo $siteInfoData['siteName']?></h3></span></a>
+            <a class="logotextlink" href="/<?php echo HOSTNAME?>index.php"><span class="logotext"><h3><?php echo $siteInfoData['siteName']?></h3></span></a>
         </div>
 
         <div class="cta">
             <?php
             if( isset( $_SESSION['logged_in'] ) && $_SESSION['logged_in'] ){?>
-                <a href="/dlrtotk/logout.php"><button class="btn">Logout</button></a>
+                <a href="/<?php echo HOSTNAME?>logout.php"><button class="btn">Logout</button></a>
                 <?php if( $_SESSION['logged_in_user_data']['admin'] ===1 &&  $_SESSION['logged_in_user_data']['recorded'] ===1){?>
-                    <a href="/dlrtotk/managesite/admin.php"><button class="btn">Admin</button></a>
+                    <a href="/<?php echo HOSTNAME?>managesite/admin.php"><button class="btn">Admin</button></a>
                 <?php }?>
             <?php } else {?>
-                <a href="/dlrtotk/login.php"><button class="btn">Login</button></a>
+                <a href="/<?php echo HOSTNAME?>login.php"><button class="btn">Login</button></a>
             <?php }?>
         </div>
     </div>

@@ -1,7 +1,10 @@
 <?php
 require_once "database/connect.php";
 require_once "functions/allfunctions.php";
+require_once "constants.php";
 session_start();
+//var_test_die( $_SESSION );
+
 $fromSentMail = 'example@gmail.com';
 
 if( isset( $_SESSION['logged_in']) && $_SESSION['logged_in'] === true ){

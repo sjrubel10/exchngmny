@@ -34,11 +34,8 @@
             </div>
 
             <div class="registration_form-group" style="display: none"><span class="errorMessage"></span></div>
-            <input class="registerBtn" type="button" value="Registration" onclick="registrationSubmitForm('main/jsvalidation/registration.php')">
+            <input type="submit" value="Register">
         </form>
         <div class="haveAccountBtn"><a class="linkDecoration" href="login.php">Already Have an Account</a></div>
     </div>
 </div>
-<script>
-
-</script>

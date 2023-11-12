@@ -10,23 +10,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Validate email format
     $result = 0;
     if( isset( $_POST ) && !empty( $_POST ) ){
-
-//        var_dump( $_POST );
-        $username = $_POST['username'];
-        $enteredPassword = $_POST['password'];
-        $userId = getUserIdByusername( $username );
+        $useremail = sanitize($_POST['useremail']);
+        $enteredPassword = sanitize($_POST['password']);
+        $userId = getUserIdByuseremail( $useremail );
 
         if( $userId ){
             $user_data = getUserDataById( $userId );
-            $valid_username = $user_data['username'];
+            $valid_email = $user_data['mail'];
             $valid_password = $user_data['password'];
-            if ($username === $valid_username && password_verify( $enteredPassword, $valid_password ) ) {
+            if ( $useremail === $valid_email && password_verify( $enteredPassword, $valid_password ) ) {
                 $_SESSION['logged_in'] = true;
                 $_SESSION['logged_in_user_data'] = $user_data;
                 $result = array(
                     'success'=> true,
                     'message'=>'Login successful',
-                    'status_code'=> 200
+                    'status_code'=> 200,
+                    'profilekey'=> $user_data['userkey'],
                 );
             } else {
                 $_SESSION['logged_in'] = false;

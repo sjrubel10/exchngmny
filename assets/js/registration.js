@@ -1,68 +1,51 @@
-
-$(document).ready(function() {
-
-    function isValidEmail(email) {
-        // Simple email format validation using a regular expression
-        let emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
-        return emailPattern.test(email);
-    }
-
-    function isValidUsername(username) {
-        // Username validation (letters and numbers only)
-        return /^[a-zA-Z0-9]+$/.test(username);
-    }
-
-    $("#registrationForm").submit(function(event) {
-        event.preventDefault();
-        let isValid = true;
-        $(".error-message").text("");
-
-        // Validation for email format
-        let email = $("#email").val();
-        if (!isValidEmail(email)) {
-            $("#emailError").text("Invalid email format.");
-            isValid = false;
+$(document).ready(function () {
+    $("#registrationForm").submit(function (event) {
+        // Frontend validation
+        var valid = true;
+        // var formData = $(this).serializeArray();
+        // Check if passwords match
+        var password = $("#password").val();
+        var confirmPassword = $("#confirmPassword").val();
+        if (password !== confirmPassword) {
+            $("#confirmPassword").addClass("error");
+            valid = false;
+        } else {
+            $("#confirmPassword").removeClass("error");
         }
 
-        // Validation for username (letters and numbers only)
-        let username = $("#username").val();
-        if (!isValidUsername(username)) {
-            $("#usernameError").text("Username can only contain letters and numbers.");
-            isValid = false;
-        }
-        let password = $("#password").val();
-        let confirmPassword = $("#confirmPassword").val();
-        if ( password !== confirmPassword ) {
-            $("#confirmPasswordError").text("Password Is Not Matched.");
-            isValid = false;
-        }
-
-        // Other form field validations (password, first name, last name, age, etc.)
-
-        if (isValid) {
-            // Submit the form via AJAX to the PHP script for backend validation
-            /*$.post("main/jsvalidation/registration.php", $("#registrationForm").serialize(), function(data) {
-                $("#message").html(data);
-            });*/
-            // let formData = $("#registrationForm").serialize();
-            var formData = new FormData($("#registrationForm")[0]);
-            console.log( formData );
+        if (!valid) {
+            event.preventDefault(); // Prevent form submission if validation fails
+            $(".error-message").html("Please fix the errors in the form.");
+        } else {
+            let formData = new FormData(this);
+            // Backend validation and processing using AJAX
             $.ajax({
                 type: "POST",
-                url: 'main/jsvalidation/registration.php',
-                data: formData,
+                url: "main/jsvalidation/registration.php",
+                data: formData, // Use FormData for handling file uploads
                 contentType: false,
+                cache: false,
                 processData: false,
-                success: function(response) {
-                    var result= JSON.parse(response);
-                    console.log( result ); // Show response from PHP (success or error message)
-                    if(result['success']){
-                        window.location.href = "../index.php";
+                success: function (response) {
+                    let responseData = JSON.parse(response);
+                    // Handle the response from the server
+                    console.log(responseData);
+                    if( responseData['success']){
+                        showPopUpMessage( responseData['message'], needTitle=false , neededConfirmButton= false, confirmButtonId=false, confirmButtonClass=false );
+                        setTimeout( hidePopUpMessage, 2000);
+                        window.location.href = "login.php";
+                    }else{
+                        showPopUpMessage( responseData['message'], needTitle=false , neededConfirmButton= false, confirmButtonId=false, confirmButtonClass=false );
                     }
-                    // You can redirect to another page or clear the form if needed
+                    // You can redirect or display a success message here
+                },
+                error: function (xhr, status, error) {
+                    // Handle errors
+                    console.error(xhr.responseText);
                 }
             });
+
+            event.preventDefault(); // Prevent the default form submission
         }
     });
 });
-

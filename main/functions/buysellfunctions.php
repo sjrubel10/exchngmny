@@ -23,7 +23,7 @@ function insertBuyData( $insert_data, $user_id ){
     if ($sql->execute()) {
         $result = array(
             'success' => true,
-            'message'=>"New record created successfully",
+            'message'=>"Thank You! </br> Your Transaction Successfully Completed",
             'status_code'=>202
         );
     } else {

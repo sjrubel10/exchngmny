@@ -18,9 +18,11 @@ $siteInfoData = getDataFromJsonFile( $filename );
     <link rel="stylesheet" type="text/css" href="assets/css/registration_login.css">
     <link rel="stylesheet" href="assets/css/header.css">
     <link rel="stylesheet" href="assets/css/common.css">
+    <link rel="stylesheet" href="assets/css/popupmessage.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="assets/js/common.js"></script>
     <script src="assets/js/registration.js"></script>
+    <script src="assets/js/popupmessage.js"></script>
     <title>Registration</title>
 </head>
 <body>

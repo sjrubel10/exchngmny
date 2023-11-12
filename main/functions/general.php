@@ -83,3 +83,19 @@ function display_button( $buttonText ='Text', $buttonId='', $buttonHolderId='', 
     return '<div class="loadMoreButtonHolder" id="'.$buttonHolderId.'"><div class="loadMoreButtonText '.$buttonClickedClass.'" id="'.$buttonId.'">'.$buttonText.'</div></div>';
 
 }
+
+function containsOnlyLettersAndNumbers( $str ) {
+    // Use a regular expression to check for letters and numbers
+    return preg_match('/^[a-zA-Z0-9]+$/', $str);
+}
+
+function returnImageType( $getType ){
+    if( $getType==='image/png' ){
+        $tyrp = '.png';
+    }else if( $getType==='image/jpeg' ){
+        $tyrp = '.jpeg';
+    }else{
+        $tyrp = '.jpeg';
+    }
+    return $tyrp;
+}

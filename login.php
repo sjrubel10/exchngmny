@@ -24,7 +24,6 @@ $siteInfoData = getDataFromJsonFile( $filename );
 </head>
 <body>
 <?php
-
 //include "views/header.php"; ?>
 <?php include_once "views/header.php"?>
 <div class="loginContainerHolder">
@@ -32,8 +31,8 @@ $siteInfoData = getDataFromJsonFile( $filename );
         <h2>Login</h2>
         <form id="loginForm" method="post">
             <div class="login_form-group">
-                <label for="username">Email:</label>
-                <input type="text" name="username" id="username" required>
+                <label for="email">Email:</label>
+                <input type="email" name="email" id="email" required>
             </div>
             <div class="login_form-group">
                 <label for="password">Password:</label>
@@ -46,18 +45,11 @@ $siteInfoData = getDataFromJsonFile( $filename );
             <span id="usernameError" class="success-message"></span>
         </div>
 
-        <div class="createNewAccount"><a href="registration.php">Create A New Account</a></div>
+        <div class="createNewAccount"><a href="/<?php echo HOSTNAME?>registration.php">Create A New Account</a></div>
     </div>
 </div>
 
-<!--<div class="container" id="logout-container">
-    <h2>Logout</h2>
-    <form id="logoutForm" method="post">
-        <button type="submit">Logout</button>
-    </form>
-</div>-->
-
-
 <?php
-include "views/footer.php"; ?>
+    include "views/footer.php";
+?>
 

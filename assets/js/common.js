@@ -136,5 +136,37 @@ function registrationSubmitForm( validateUrl ) {
     });
 }
 
+function popUpMessageShow( message, needTitle , neededConfirmButton, confirmButtonId, confirmButtonClass ){
+
+    if( needTitle !==false  ){
+        var popUpBtnTitle = ' <h2>Popup Card Title</h2>';
+    }else{
+        popUpBtnTitle = '';
+    }
+    if( neededConfirmButton !==false ){
+        var btnNeed = '<div class="button-container">\
+                            <button class="btnYes '+confirmButtonClass+'" id='+confirmButtonId+'>Yes</button>\
+                            <button id="btnNo">No</button>\
+                        </div>'
+    }else{
+         btnNeed = '';
+    }
+    let displayPopUp = '<div id="popupContainer" class="popup-container">\
+                            <div class="popup-card">\
+                                <span class="close-btn" id="closePopupBtn">&times;</span>\
+                               '+popUpBtnTitle+'\
+                                <p>'+message+'</p>\
+                                '+btnNeed+'\
+                            </div>\
+                        </div>';
+    $("body").append( displayPopUp );
+}
+$("#closePopupBtn").click(function() {
+    $("#popupContainer").fadeOut();
+});
+$("#btnNo").click(function() {
+    $("#popupContainer").fadeOut();
+});
+
 
 
