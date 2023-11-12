@@ -81,7 +81,6 @@ function get_type_of_post( $action ){
 function display_button( $buttonText ='Text', $buttonId='', $buttonHolderId='', $buttonClickedClass=''){
 
     return '<div class="loadMoreButtonHolder" id="'.$buttonHolderId.'"><div class="loadMoreButtonText '.$buttonClickedClass.'" id="'.$buttonId.'">'.$buttonText.'</div></div>';
-
 }
 
 function containsOnlyLettersAndNumbers( $str ) {
