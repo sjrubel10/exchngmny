@@ -5,17 +5,7 @@
  * Date: 10/9/2023
  * Time: 10:40 PM
  */
-function var_test_die( $data ){
-    echo "<pre>";
-        var_dump($data);
-    echo "</pre>";
-    die();
-}
-function var_test( $data ){
-    echo "<pre>";
-        var_dump($data);
-    echo "</pre>";
-}
+
 function getUserIdByProfileKey( $profileKey ) {
     $conn = Db_connect();
 
@@ -174,7 +164,7 @@ function getUsersData( $conn, $already_loaded_ids = [], $limit = 20 ) {
         $notIn = "";
     }
     // SQL query to select data from the users table
-    $sql = "SELECT * FROM users WHERE `recorded` = 1 $notIn ORDER BY `id` LIMIT $limit";
+    $sql = "SELECT * FROM users WHERE `recorded` = 1 $notIn ORDER BY `id` DESC LIMIT $limit";
 
     // Execute the query
     $result = $conn->query($sql);

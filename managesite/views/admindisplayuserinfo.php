@@ -22,7 +22,7 @@ if( $totaluser > 0 ) {
         }
         //    $usersDataHtml .= '<div class=""> <span class="">'.$userData['username'].'</span> </div>';
         $usersDataHtml .= '<tr id="user_' . $userData['userkey'] . '">
-                                <td>' . $userData['full_name']. '</td>
+                                <td><a class="userLinkAmin" href="/'.HOSTNAME.'profile.php?profilekey='.$userData['userkey'].'">' . $userData['full_name']. '</a></td>
                                 <td>' . $userData['username'] . '</td>
                                 <td>' . $userData['mail'] . '</td>
                                 <td><input id="isActive_'.$userData['userkey'].'" type="checkbox" '.$is_checked.' ></td>

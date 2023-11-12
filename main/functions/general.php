@@ -99,3 +99,15 @@ function returnImageType( $getType ){
     }
     return $tyrp;
 }
+
+function var_test_die( $data ){
+    echo "<pre>";
+    var_dump($data);
+    echo "</pre>";
+    die();
+}
+function var_test( $data ){
+    echo "<pre>";
+    var_dump($data);
+    echo "</pre>";
+}
