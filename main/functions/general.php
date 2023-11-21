@@ -93,6 +93,8 @@ function returnImageType( $getType ){
         $tyrp = '.png';
     }else if( $getType==='image/jpeg' ){
         $tyrp = '.jpeg';
+    }else if( $getType==='image/jpg' ){
+        $tyrp = '.jpg';
     }else{
         $tyrp = '.jpeg';
     }

@@ -175,24 +175,49 @@ $today_buySell_Rate = array(
 
         $("body").on("click", ".cancelBuySell", function () {
             $("#buySellCardHolder").fadeOut();
-            // $("#buyButton").removeClass("selectedBuySell");
-            // $("#sellButton").removeClass("selectedBuySell");
         });
 
-        // $("#myInput").keypress(function(event) { receive_amount
+        // $("#myInput").keypress(function(event) { send_amount
         $("body").on("keyup", "#send_amount", function () {
-            let receive_method_val = $("#receive_method").val();
-            
-            if( butSellType.trim() === 'Buy Dollar' ){
-                var getMethodRate = 'todayDollerBuyRate'+receive_method_val;
-            }else{
-                getMethodRate = 'todayDollerSellRate'+receive_method_val;
-            }       
-            let todaysExchangeRate = todatBuySellRate[getMethodRate];
 
             let currentValue = $(this).val();
-            let sendValue = currentValue*todaysExchangeRate;
-            $("#receive_amount").val( sendValue );
+            if( butSellType.trim() === 'Buy Dollar' ){
+                var receive_method_val = $("#receive_method").val();
+                var getMethodRate = 'todayDollerBuyRate'+receive_method_val;
+                var isBuy = true;
+            }else{
+                receive_method_val = $("#send_method").val();
+                getMethodRate = 'todayDollerSellRate'+receive_method_val;
+                isBuy = false;
+            }       
+            let todaysExchangeRate = todatBuySellRate[getMethodRate];
+            if( isBuy ){
+                var sendValue = currentValue/todaysExchangeRate;
+            }else{
+                 sendValue = currentValue*todaysExchangeRate;
+            }
+
+            $("#receive_amount").val( sendValue.toFixed(3) );
+        });
+
+//        if( butSellType.trim() === 'Buy Dollar' ) {
+        $("body").on("change", "#send_method", function () {
+            // Get the selected value
+            if( butSellType.trim() === 'Buy Dollar' ) {
+                let selectedValue = $(this).val();
+                let mobileBankingText = selectedValue + ' Number';
+                $("#mobileBankingName").text(mobileBankingText);
+            }
+//            alert( mobileBankingText ); receive_method
+        });
+        $("body").on("change", "#receive_method", function () {
+            // Get the selected value
+            if( butSellType.trim() !== 'Buy Dollar' ) {
+                let selectedValue = $(this).val();
+                let mobileBankingText = selectedValue + ' Number';
+                $("#mobileBankingName").text(mobileBankingText);
+            }
+//            alert( mobileBankingText ); receive_method
         });
 
 //        setTimeout(hidePopUpMessage, 1000);

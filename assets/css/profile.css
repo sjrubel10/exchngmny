@@ -6,7 +6,7 @@ body {
 
 .profile-container_holder{
     display: block;
-    float: left;
+    /*float: left;*/
     max-width: 100%;
 }
 .profile-container {

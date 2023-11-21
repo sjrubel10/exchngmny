@@ -6,9 +6,17 @@ function get_money_exchange_form( buySell ) {
             <input type="text" id="bKash_tRX_ID" name="bKash_tRX_ID" required><br>';
         // $("#transactionType").val('buy');
         var type = 'buy';
+        var buySendMethod = '<option value="bkash">Bkash</option><option value="rocket">Rocket</option><option value="nagad">Nagad</option>';
+        var buyReceivedMethod = '<option value="skrill">Skrill</option> <option value="neteller">Neteller</option><option value="perfectMoney">Perfect Money</option>';
+        var sellSendMethod = '';
+        var sellReceivedMethod = '';
     }else{
         need_bkashTrId = '';
         type ='sell';
+        buySendMethod = '';
+        buyReceivedMethod = '';
+        sellReceivedMethod = '<option value="bkash">Bkash</option><option value="rocket">Rocket</option><option value="nagad">Nagad</option>';
+        sellSendMethod = '<option value="skrill">Skrill</option> <option value="neteller">Neteller</option><option value="perfectMoney">Perfect Money</option>';
     }
     $("#buySellCardHolder").fadeIn();
     let buySellForm = '<div class="form-container">\
@@ -16,23 +24,21 @@ function get_money_exchange_form( buySell ) {
                             <label for="send_method">Send Method:</label>\
                             <select id="send_method" name="send_method" required>\
                                 <option value="">Select Send Method</option>\
-                                <option value="method1">Bkash</option>\
+                                '+buySendMethod+sellSendMethod+'\
                             </select><br>\
                             <label for="receive_method">Receive Method:</label>\
                             <select id="receive_method" name="receive_method" required>\
                                 <option value="">Select Receive Method</option>\
-                                <option value="skrill">Skrill</option>\
-                                <option value="neteller">Neteller</option>\
-                                <option value="perfectMoney">Perfect Money</option>\
+                                '+buyReceivedMethod+sellReceivedMethod+'\
                             </select><br>\
                             <label for="send_amount">Send Amount:</label>\
                             <input type="number" id="send_amount" name="send_amount" required><br>\
                             <label for="receive_amount">Receive Amount:</label>\
                             <input type="number" id="receive_amount" name="receive_amount" readonly required><br>\
-                            <label for="bKash_number">bKash Number:</label>\
+                            <label for="bKash_number" id="mobileBankingName">bKash Number:</label>\
                             <input type="text" id="bKash_number" name="bKash_number" required><br>\
                             '+need_bkashTrId+'\
-                            <label for="skrill_email">Skrill Email:</label>\
+                            <label for="skrill_email" id="digitalWalletBrands">Skrill Email:</label>\
                             <input type="email" id="skrill_email" name="skrill_email" required><br>\
                             <label for="contact_no">Contact Number:</label>\
                             <input type="tel" id="contact_no" name="contact_no" required><br>\
