@@ -202,25 +202,36 @@ $today_buySell_Rate = array(
 
 //        if( butSellType.trim() === 'Buy Dollar' ) {
         $("body").on("change", "#send_method", function () {
-            // Get the selected value
             if( butSellType.trim() === 'Buy Dollar' ) {
                 let selectedValue = $(this).val();
                 let mobileBankingText = selectedValue + ' Number';
                 $("#mobileBankingName").text(mobileBankingText);
             }
-//            alert( mobileBankingText ); receive_method
         });
         $("body").on("change", "#receive_method", function () {
-            // Get the selected value
             if( butSellType.trim() !== 'Buy Dollar' ) {
                 let selectedValue = $(this).val();
                 let mobileBankingText = selectedValue + ' Number';
                 $("#mobileBankingName").text(mobileBankingText);
             }
-//            alert( mobileBankingText ); receive_method
         });
 
-//        setTimeout(hidePopUpMessage, 1000);
+        $("body").on("change", "#receive_method", function () {
+            if( butSellType.trim() === 'Buy Dollar' ) {
+                let selectedValue = $(this).val();
+                let mobileBankingText = selectedValue + ' Email';
+                $("#digitalWalletBrands").text(mobileBankingText);
+            }
+        });
+        $("body").on("change", "#send_method", function () {
+            if( butSellType.trim() !== 'Buy Dollar' ) {
+                let selectedValue = $(this).val();
+                let mobileBankingText = selectedValue + ' Email';
+                $("#digitalWalletBrands").text(mobileBankingText);
+            }
+        });
+
+//        setTimeout(hidePopUpMessage, 1000); digitalWalletBrands
 
 });
 </script>
